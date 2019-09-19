@@ -49,7 +49,7 @@ curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
 * `<leader><leader>j` 按下后，会在每一行的行首高亮且有一个字母标在高亮处，这时输入指定字母就可以跳过去了，这个可以说是起飞的关键之一，必须要熟练掌握
 * `<leader><leader>k` 上面是向下搜索，这个是向上，其他都一样
 * `<leader><leader>w` 同`,,j`，只不过是单词级的向后搜索
-* `<leader><leader>b` 同`jjk`, 只不过是单词级的向前搜索（`,,w` `,,b` 不如行级好用，因为太花了，我们可以用行级 Jump 到指定行，再用 f 过去，或者按几个 w 也可以，如果靠近行尾，可以先按$到行尾再按几个 b，方法很多。
+* `<leader><leader>b` 同`,,k`, 只不过是单词级的向前搜索（`,,w` `,,b` 不如行级好用，因为太花了，我们可以用行级 Jump 到指定行，再用 f 过去，或者按几个 w 也可以，如果靠近行尾，可以先按$到行尾再按几个 b，方法很多。
 
 ## 3.4 多标签
 * 在用 ctrl-p 搜到一个文件后，可以再按 ctrl-t 在新标签里打开
@@ -92,18 +92,16 @@ There's a lot more, check it out at :help surround
 ```vim
 nnoremap <f5> :!ctags -R<CR>
 
-let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 set nospell
 set relativenumber
+set nopaste
+
+let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 let g:ctrlp_cmd = 'CtrlPMixed'
 
 let g:syntastic_check_on_open = 1
 let g:syntastic_lua_checkers = ["luac", "luacheck"]
 let g:syntastic_lua_luacheck_args = "--no-unused-args"
-
-augroup filetype
-    au! BufRead,BufNewFile *.sproto setfiletype sproto
-augroup end
 
 " To open each buffer in its own tabpage
 " au BufAdd,BufNewFile * nested tab sball
@@ -116,17 +114,6 @@ set iskeyword-=-                    " '.' is an end of word designator
 " suffixesadd为尝试路径后缀，详情help suffixesadd
 set includeexpr=substitute(v:fname,'\\.','/','g')
 set suffixesadd=.lua
-
-" leaer extend
-nmap <leader>j <C-w>j
-nmap <leader>k <C-w>k
-nmap <leader>l <C-w>l
-nmap <leader>k <C-w>k
-
-" set guifont=Fixedsys\ Excelsior\ 3.01\ Regular:h16,Courier\ New\ Regular:h16
-" set guifont=Fixedsys\ Excelsior\ 3.01
-
-nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 ```
 
 把上面这些内容放到 ~/.vimrc.local 文件内，里面比较重要的是
