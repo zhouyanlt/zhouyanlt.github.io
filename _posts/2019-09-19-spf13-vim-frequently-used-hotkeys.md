@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "spf13-vim 介绍及常用快捷键"
-date:   2019-09-05 09:59:25 +0800
+date:   2019-09-19 05:00:25 +0800
 categories: 游戏开发
 ---
 
@@ -16,7 +16,8 @@ It is a good starting point for anyone intending to use VIM for development runn
 #### 个人使用感受：
 我觉得 spf-13 算是整合的比较好的一个插件集了，有很多好用的插件，也有很多好用的快捷键，Vim 不是说装好插件就可以用的很舒服了，还要自定义很多快捷键，这些都是在 .vimrc 里配置的，想要用的舒服、顺手，这个配置要改很多，这是一个长期且艰辛的工作，而 spf-13 都帮我们做好了，省了很多事。
 
-一句话总结： spf13-vim 是一个开箱即用的 vim 整合包。
+一句话总结： spf13-vim 是一个开箱即用的 vim 整合包。  
+(就像大脚/魔盒之于 WOW)
 
 可以说有了 spf13, Vim 才成为一个强力的终端 IDE。
 
@@ -76,16 +77,13 @@ This plugin is a tool for dealing with pairs of "surroundings." Examples of surr
 
 Details follow on the exact semantics, but first, consider the following examples. An asterisk (*) is used to denote the cursor position.
 
-
-|--|--|--|
----
-| Old text | Command | New text |
-| -- | -- | -- |
-| "Hello *world!"          | ds"        | Hello world!
-| [123+4*56]/2             | cs])       | (123+456)/2
-| "Look ma, I'm *HTML!"    | cs"<q>     | <q>Look ma, I'm HTML!</q>
-| if *x>3 {                | ysW(       | if ( x>3 ) {
-| my $str = *whee!;        | vllllS'    | my $str = 'whee!';
+Old text | Command | New text
+--- | --- | ---
+"Hello *world!"          | ds"        | Hello world!
+[123+4*56]/2             | cs])       | (123+456)/2
+"Look ma, I'm *HTML!"    | cs"\<q\>     | \<q\>Look ma, I'm HTML!\</q\>
+if *x>3 {                | ysW(       | if ( x>3 ) {
+my $str = *whee!;        | vllllS'    | my $str = 'whee!';
 
 For instance, if the cursor was inside "foo bar", you could type cs"' to convert the text to 'foo bar'.
 
