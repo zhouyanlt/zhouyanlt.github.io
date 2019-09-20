@@ -5,7 +5,7 @@ date:   2019-09-19 05:00:25 +0800
 categories: Vim
 ---
 
-最近发起了一个[公司内部的学习班计划](_posts/2019-09-19-online-joint-learning-plan.md), 第一期的 Vim 入门，用的[实验楼的课程](https://www.shiyanlou.com/courses/2)，看完后还是有很多收获的，我记了下来，免得以后忘掉，大家也可以看看，有些非常有用，比如 `g*`。
+最近发起了一个[公司内部的学习班计划](https://zhouyanlt.github.io/education/2019/09/19/online-joint-learning-plan.html), 第一期的 Vim 入门，用的[实验楼的课程](https://www.shiyanlou.com/courses/2)，看完后还是有很多收获的，我记了下来，免得以后忘掉，大家也可以看看，有些非常有用，比如 `g*`。
 
 命令 | 说明
 ---|---
