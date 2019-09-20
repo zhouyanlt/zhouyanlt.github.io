@@ -62,6 +62,7 @@ categories: vim
 * "vim.searchHighlightColor": "#5f00af", 设置搜索高亮，不设的话没有高亮，很蠢
 * "vim.hlsearch": true, 高亮显示最近的搜索结果，就是你按一下 *, 把结果都高亮出来，这个很重要
 * "vim.normalModeKeyBindingsNonRecursive", 这个是改按键映射关系的，改完可以使用 H/L 切换标签
+
 ### Vim 无关的
 * "editor.lineNumbers": "relative", 设置相对行号，这个对于多行删除，多行注释非常重要，有了这个才算是可以用，否则自己数行数那基本上没法用
 * "files.autoSave": "onFocusChange", 设置文件自动保存，onFocusChange 指的是焦点离开后就保存，这个跟 Vim 无关，但非常好用，不用一直按 Cmd+s 了
@@ -200,6 +201,13 @@ end
 * `ctrl+u`, 上半页
 
 这四个非常常用，尤其是读代码时，我们不可能按住 `j/k` 不放去翻代码。
+
+### 4.2.8 分栏
+* `:vs`, 创建一个竖向分栏
+* `:sp`, 创建一个横向分栏
+* `ctrl+w` + `hjkl`, 分栏之间移动
+
+分栏在屏幕比较大时还是很方便的，有时候写代码时，要看着另一块代码，也分方便。
 
 # 5. Postface
 暂时就想到这些，还有很多比较常用的，想到了再补充。以上这些如果能掌握，基本上在 VSCode-Vim 环境下写代码足够了，等真正用进去了，才会发现有很多不会的或者不方便的点，这时要学会去 Google 或请教别人，只有这样才能不断强化，最终让 Vim 操作变成肌肉记忆。
