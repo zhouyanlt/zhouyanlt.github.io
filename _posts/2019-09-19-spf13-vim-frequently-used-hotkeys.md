@@ -11,10 +11,10 @@ spf13-vim is a distribution of vim plugins and resources for Vim, Gvim and MacVi
 spf13-vim 是 Vim，Gvim 和 MacVim 的 vim 插件和资源的整合包。
 
 It is a good starting point for anyone intending to use VIM for development running equally well on Windows, Linux, *nix and Mac.  
-对于任何打算使用VIM进行开发的人来说，这是一个很好的起点，可以在Windows，Linux，* nix和Mac上同样运行。
+对于任何打算使用VIM进行开发的人来说，这是一个很好的起点，可以在Windows，Linux，\*nix和Mac上同样运行。
 
 ## 个人使用感受：
-我觉得 spf-13 算是整合的比较好的一个插件集了，有很多好用的插件，也有很多好用的快捷键，Vim 不是说装好插件就可以用的很舒服了，还要自定义很多快捷键，这些都是在 .vimrc 里配置的，想要用的舒服、顺手，这个配置要改很多，这是一个长期且艰辛的工作，而 spf-13 都帮我们做好了，省了很多事。
+我觉得 spf13 算是整合的比较好的一个插件集了，有很多好用的插件，也有很多好用的快捷键，Vim 不是说装好插件就可以用的很舒服了，还要自定义很多快捷键，这些都是在 .vimrc 里配置的，想要用的舒服、顺手，这个配置要改很多，这是一个长期且艰辛的工作，而 spf13 都帮我们做好了，省了很多事。
 
 spf13-vim 是一个开箱即用的 vim 整合包，就像大脚/魔盒之于WOW，可以说有了 spf13, Vim 才成为一个强力的终端 IDE。
 
@@ -36,7 +36,7 @@ curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
 * `<Ctrl-e>` 按一下打开文件浏览器，再按一下关闭
 * `<leader>e` 打开文件浏览器，并且文件定位到当前打开的文件上
 
-> `<Ctrl-e>` 表示 Ctrl + e, `<leader>e` leader 是 Vim 中的一个概念，表示“前置按键”，有很多操作要先按下 leader 键再接一个按键，leader 可以在 vimrc 里配置，默认是什么记不清了，在 spf13 里是逗号(`,`)
+> `<Ctrl-e>` 表示 Ctrl + e, `<leader>e` leader 是 Vim 中的一个概念，表示“前置按键”，有很多操作要先按下 leader 键再接一个按键，leader 可以在 vimrc 里配置，默认是`\`，在 spf13 里是逗号(`,`)
 
 打开文件浏览器后，可以使用 hjkl 上下移动，按回车就会打开当前光标所在的文件，按?可以打开帮助界面，里面有详细的按键介绍，有兴趣可以看看，常用的就是移动+回车。
 
