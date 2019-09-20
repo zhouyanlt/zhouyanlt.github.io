@@ -132,6 +132,7 @@ gU | make uppercase (转为大写)
 < | shift left (左移)
 
 #### 4.2.3.2 动作命令(Motions)
+
 动作命令 | 功能
 ---|---
 f{char} | find, 行内搜索一个字符
