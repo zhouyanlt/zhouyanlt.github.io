@@ -2,7 +2,7 @@
 layout: post
 title:  "MMORPG 好玩的原因"
 date:   2019-09-05 17:59:25 +0800
-categories: 游戏开发
+categories: gamedev
 ---
 这篇文章只是根据我浅显的理解来谈一谈，不一定对，大家随便看看就好。
 

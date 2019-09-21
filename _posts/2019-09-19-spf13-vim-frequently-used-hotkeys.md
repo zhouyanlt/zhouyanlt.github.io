@@ -2,7 +2,7 @@
 layout: post
 title:  "spf13-vim 介绍及常用快捷键"
 date:   2019-09-19 05:00:25 +0800
-categories: Vim
+categories: vim
 ---
 
 # 一、什么是 [spf13-vim](https://github.com/spf13/spf13-vim)

@@ -2,7 +2,7 @@
 layout: post
 title:  "从程序角度谈谈游戏策划的重要性"
 date:   2019-09-05 09:59:25 +0800
-categories: 游戏开发
+categories: gamedev
 ---
 
 # 程序员对策划的普遍看法
