@@ -172,6 +172,14 @@ git diff-index --check --cached $against --
 
 其他的 --no-max 系列，我们在 .luacheckrc 里配完后已经没必要指定了。
 
+### 5. Git allownonascii 设置为 true
+在项目目录内执行以下指令：
+```
+git config --bool hooks.allownonascii true
+```
+
+这个一定要设置，否则项目中不能有中文文件名，如果没有中文名可以忽略这一步。
+
 # Postface
 
 Git 的 Hook 机制还是很好用的，其他语言也可以用这种方法做一些静态检查，用 Hook 也有其他一些东西可以玩的, 这里提出几个想法，抛砖引玉：
