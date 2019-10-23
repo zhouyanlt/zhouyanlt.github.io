@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Git 提交前通过 luacheck 检查待提交代码"
+title:  "使用 Git Hook 在提交代码前通过 luacheck 自动检查待提交代码"
 date:   2019-10-23 19:56:25 +0800
 categories: git lua luacheck
 ---
