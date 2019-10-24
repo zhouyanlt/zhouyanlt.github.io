@@ -161,7 +161,9 @@ git diff-index --check --cached $against --
 我是开着的，因为这种空白是不必要的，也会导致 luacheck 警告。
 
 ### 3. luacheck 的路径
-在 for 循环里用到了 luacheck 的绝对路径, 同学们在用的时候要看下是否自己的也在这里，如果不在，可以用 `which luacheck` 来查看它的绝对路径，然后再改下脚本。
+在 for 循环里用到了 luacheck 的绝对路径`/usr/local/bin/luacheck`, 同学们在用的时候要看下是否自己的也在这里，如果不在，可以用 `which luacheck` 来查看它的绝对路径，然后再改下脚本。
+
+这里必须要用绝对路径，哪怕在你终端里可以直接用 luacheck, 原因不是很清楚，不加就提示找不到，可能 git 用的 PATH 变量和终端的不一样。
 
 ### 4. luacheck 的参数
 * -g, --no-global, 不警告全局变量
