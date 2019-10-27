@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>VSCodeVim 最佳实践 | 周岩的 BLOG</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="VSCodeVim 最佳实践" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1. Preface 初学者在学了一些 Vim 入门教程，掌握了一些基本操作后，往往不知道从何下手，日常工作中不太可能在终端下直接写代码，何况直接终端用 Vim 写代码，还需要大量插件的支持。" />
+<meta property="og:description" content="1. Preface 初学者在学了一些 Vim 入门教程，掌握了一些基本操作后，往往不知道从何下手，日常工作中不太可能在终端下直接写代码，何况直接终端用 Vim 写代码，还需要大量插件的支持。" />
+<link rel="canonical" href="/vim/2019/09/20/vscode-vim-best-practices.html" />
+<meta property="og:url" content="/vim/2019/09/20/vscode-vim-best-practices.html" />
+<meta property="og:site_name" content="周岩的 BLOG" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-20T10:36:25+08:00" />
+<script type="application/ld+json">
+{"url":"/vim/2019/09/20/vscode-vim-best-practices.html","headline":"VSCodeVim 最佳实践","dateModified":"2019-09-20T10:36:25+08:00","datePublished":"2019-09-20T10:36:25+08:00","description":"1. Preface 初学者在学了一些 Vim 入门教程，掌握了一些基本操作后，往往不知道从何下手，日常工作中不太可能在终端下直接写代码，何况直接终端用 Vim 写代码，还需要大量插件的支持。","mainEntityOfPage":{"@type":"WebPage","@id":"/vim/2019/09/20/vscode-vim-best-practices.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="周岩的 BLOG" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">周岩的 BLOG</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/blog.html">Blog</a><a class="page-link" href="/staff.html">Staff</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1>VSCodeVim 最佳实践</h1>
+
+<p>
+  20 Sep 2019
+  
+  
+    - <a href="/authors/zhouyan.html">周岩</a>
+  
+</p>
+
+<h1 id="1-preface">1. Preface</h1>
+<p>初学者在学了一些 Vim 入门教程，掌握了一些基本操作后，往往不知道从何下手，日常工作中不太可能在终端下直接写代码，何况直接终端用 Vim 写代码，还需要大量插件的支持。</p>
+
+<p>其实我认识的很多 Vim 用户，现在已经不用原生 Vim 了，都是先选一个自己喜欢的编辑器/IDE, 再装 Vim 插件，基本上没有哪个现代编辑器/IDE没有 Vim 插件的了。</p>
+
+<p>我比较喜欢 VSCode，日常工作也是用 VSCode 写代码，所以今天就来介绍下 VSCode 里 Vim 插件的一些设置和应用技巧，至于是不是最佳实践不重要，起这样的标题完全是不知道用什么好，权当做一回标题党吧。</p>
+
+<h1 id="2-编辑器选择">2. 编辑器选择</h1>
+<p>在讲具体内容之前，先介绍几个编辑器的 Vim 插件现状, 顺便解释下我为什么要选 <code class="highlighter-rouge">VSCode</code>:</p>
+<ul>
+  <li>Sublime Text, 编辑器内建了对 Vim 的支持，所以不装插件只要改下配置就能用，但是功能比较原始，实在谈不上好用，只能说能用。也许有很多第三方插件提供了类似 easymotion 这样的功能吧，我没研究过，想用的可以看看有没有，如果有还是可以用的。</li>
+  <li>VisualStudio, 由于 VS 内建了海量的快捷键，且用熟了之后也很方便，所以对于 VS 资深用户，装个 Vim 插件反而不好用，这上面的 Vim 插件我也用过，体验非常糟糕，不推荐。</li>
+  <li>MacVim, 配合 <a href="https://zhouyanlt.github.io/vim/2019/09/18/spf13-vim-frequently-used-hotkeys.html">spf13-vim</a> 还是可以用的，我个人在对 VSCode 审美疲劳时也会用一用，轻量、好看、好用。</li>
+  <li>IntelliJ IDEA, 这是个 IDE 了，非常重，但功能还是十分强大的，Vim 插件也基本够用，好像也是有 easymotion 的，基本上很完整，还有社区免费版可用，所以用的人非常多，但是我一开 CPU 就狂转，所以最终没用它。</li>
+  <li>VSCode, 目前我最喜欢的，Vim 插件支持非常成熟，其他编辑器的 Vim 插件一般只是提供了 Vim 的原生功能，而 VSCode 的 Vim 插件居然提供了很多原生 Vim 里的插件功能，也就是说，它是一个 Vim + Vim插件的插件集合体，功能非常强大，像是最常用的 easymotion 就提供了支持。原生 Vim 其实并不好用，想要高效还是要配合插件一起用，而 VSCode 的 Vim 插件做到了，我认为现在没有什么编辑器的 Vim 插件能够做到。</li>
+</ul>
+
+<h1 id="3-vscode-vim-插件的安装">3. VSCode Vim 插件的安装</h1>
+<p>上面说了那么多，对于初学者来说，建议直接用 VSCode 吧，不折腾。</p>
+
+<p>安装非常方便，打开插件界面，输入 Vim，第一个就是，点安装即可。</p>
+
+<p>800多万的安装量，感受下 Vim 用户的庞大，是不是感觉不用 Vim 和时代脱离了：）</p>
+
+<h1 id="4-最佳实践">4. 最佳实践</h1>
+
+<h2 id="41-settingsjson-配置">4.1 settings.json 配置</h2>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"vim.easymotion"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vim.leader"</span><span class="p">:</span><span class="w"> </span><span class="s2">","</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vim.searchHighlightColor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#5f00af"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vim.hlsearch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"vim.normalModeKeyBindingsNonRecursive"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"before"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"H"</span><span class="p">],</span><span class="w"> </span><span class="nl">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"g"</span><span class="p">,</span><span class="w"> </span><span class="s2">"T"</span><span class="p">],</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nl">"before"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"L"</span><span class="p">],</span><span class="w"> </span><span class="nl">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"g"</span><span class="p">,</span><span class="w"> </span><span class="s2">"t"</span><span class="p">]</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+
+    </span><span class="nl">"editor.lineNumbers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"relative"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"files.autoSave"</span><span class="p">:</span><span class="w"> </span><span class="s2">"onFocusChange"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"workbench.editor.enablePreviewFromQuickOpen"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"editor.renderWhitespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boundary"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"editor.detectIndentation"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"showMusicMetrics"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"showGitMetrics"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"showWeeklyRanking"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"editor.minimap.enabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"git.autofetch"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>首先把上面的配置放到自己的配置文件里，Mac 平台点左上角 Code-&gt;Preferences-&gt;Settings-&gt; 在右边往下拉，找到 Edit in settings.json, 把上面内容放进去，大括号自己去掉。</p>
+
+<p>解释几个：</p>
+<h3 id="vim-相关的">Vim 相关的</h3>
+<ul>
+  <li>“vim.easymotion”: true, 打开 easymotion, 这个是文件内快速跳转的插件(Jump everywhere)</li>
+  <li>“vim.leader”: “,”, 设置 leader 键为逗号，leader 键是 Vim 里某些指令的前置按键，默认是反斜线，比较难按。这个按键非常常用，必须改成逗号</li>
+  <li>“vim.searchHighlightColor”: “#5f00af”, 设置搜索高亮，不设的话没有高亮，很蠢</li>
+  <li>“vim.hlsearch”: true, 高亮显示最近的搜索结果，就是你按一下 *, 把结果都高亮出来，这个很重要</li>
+  <li>“vim.normalModeKeyBindingsNonRecursive”, 这个是改按键映射关系的，改完可以使用 H/L 切换标签</li>
+</ul>
+
+<h3 id="vim-无关的">Vim 无关的</h3>
+<ul>
+  <li>“editor.lineNumbers”: “relative”, 设置相对行号，这个对于多行删除，多行注释非常重要，有了这个才算是可以用，否则自己数行数那基本上没法用</li>
+  <li>“files.autoSave”: “onFocusChange”, 设置文件自动保存，onFocusChange 指的是焦点离开后就保存，这个跟 Vim 无关，但非常好用，不用一直按 Cmd+s 了</li>
+  <li>“workbench.editor.enablePreviewFromQuickOpen”: false, 用 ctrl-p 打开的文件，默认是处理预览状态的，重新预览其他文件时就没了，要双击标签才会固定住，这个设置就是解决这个问题的，设置完后打开就是固定住的，读代码很方便</li>
+  <li>“editor.renderWhitespace”: “boundary”, 设置显示行首的空白字符（空格和制表符），这个也很不错，直观的看到自己输出的空白，有些开源项目要求必须全用空格。</li>
+  <li>“editor.minimap.enabled”: false, 关掉右边的小地图，就是宽宽的那个，这个看个人喜好了，我不太喜欢，开分栏时会减少显示面积</li>
+</ul>
+
+<h2 id="42-行级操作删除注释左移右移">4.2 行级操作（删除、注释、左移右移）</h2>
+<p>上面设置了相对行号后，才能方便的做多行操作，在做具体操作前，先说单行操作分别是什么：</p>
+<ul>
+  <li><code class="highlighter-rouge">dd</code> 删除一行, <code class="highlighter-rouge">d</code> 是 <code class="highlighter-rouge">delete</code>, 两个 d 表示对一行操作，Vim 里的约定吧</li>
+  <li><code class="highlighter-rouge">gcc</code> 注释一行, <code class="highlighter-rouge">gc</code> 是 <code class="highlighter-rouge">go comment</code>, 两个 c 表示注释一行</li>
+  <li><code class="highlighter-rouge">&lt;&lt;</code> 左移一行</li>
+  <li><code class="highlighter-rouge">&gt;&gt;</code> 右移一行</li>
+</ul>
+
+<p>上面的操作，在 v 模式下，都可以生效，可以试一下按 <code class="highlighter-rouge">Shift+v</code> 选中一行，然后分别按 <code class="highlighter-rouge">d</code>, <code class="highlighter-rouge">gc</code>,<code class="highlighter-rouge">&lt;</code>, <code class="highlighter-rouge">&gt;</code>,  看看是不是删除、注释、左移、右移</p>
+
+<p>好了，有了上面的这些知识，我们可以开始多行操作了，具体操作方法如下：</p>
+<ul>
+  <li>光标移到想要删除或注释的第一行</li>
+  <li>通过左边的相对行号，看一下想操作的最后一行的相对行号n</li>
+  <li>得出要操作的行数 m = n+1 (因为光标所在那行相当于第0行，所以要+1)</li>
+  <li>这时就可以用 Vim 的多行操作了，删除一行是 dd, 删除多行是 mdd; 注释一行是 gcc, 注释多行是 mgcc, 其他的类推</li>
+</ul>
+
+<h2 id="43-切换标签">4.3 切换标签</h2>
+<ul>
+  <li><code class="highlighter-rouge">H</code> 大写的 H 移动到左边那个标签</li>
+  <li><code class="highlighter-rouge">L</code> 大写的 L 移动到右边那个标签</li>
+  <li><code class="highlighter-rouge">ngt</code> 移动到第 n 个标签（从左往右从1开始），当标签开的比较多时，由于标签上没显示数字，要自己数是第几个，所以基本上没法用。</li>
+</ul>
+
+<p>对于标签开的比较多时怎么操作，我的习惯是这样的：</p>
+<ul>
+  <li>如果标签离的近，就是 H/L 移动过去</li>
+  <li>如果离的不是特别远，按5下 H/L 还是可以接受的</li>
+  <li>如果特别远，对于要长时间写代码的几个标签，用鼠标把几个常用标签拖到一起；如果是一次性的，就用鼠标直接点了；也会用 ctrl-p 直接搜文件重新打开。</li>
+</ul>
+
+<h2 id="44-调整光标所在行的位置vim基本功能">4.4 调整光标所在行的位置(Vim基本功能)</h2>
+<ul>
+  <li><code class="highlighter-rouge">zz</code> 调整光标所在行到屏幕中间 (z 什么意思我也不知道，就硬记吧)</li>
+  <li><code class="highlighter-rouge">zt</code> 调整光标所在行到屏幕最上方 (t == top)</li>
+  <li><code class="highlighter-rouge">zb</code> 调整光标所在行到屏幕最下方 (b == bottom)</li>
+</ul>
+
+<p>这三个用的非常多，尤其是 <code class="highlighter-rouge">zz</code>, 一定要熟练使用</p>
+
+<h2 id="45-文件内快速搜索某个函数变量vim基本功能">4.5 文件内快速搜索某个函数、变量(Vim基本功能)</h2>
+<p>把光标移到想搜索的那个函数名或变量名上，按<code class="highlighter-rouge">*</code>就可以搜索了，按<code class="highlighter-rouge">n</code>下一个，按<code class="highlighter-rouge">N</code>上一个。</p>
+
+<p>比如看到类里有个成员变量，想去回到它的定义处看有没有注释说它是干嘛的，一般定义的地方肯定是文件内第一次出现的地方，我们可以这么操作：</p>
+<ul>
+  <li>先在这个变量上按下<code class="highlighter-rouge">*</code>锁定它</li>
+  <li>按 <code class="highlighter-rouge">gg</code> 回到行首</li>
+  <li>按 <code class="highlighter-rouge">n</code> 到下一个它出现的地方</li>
+  <li>按 <code class="highlighter-rouge">zz</code> 调整到屏幕中间，方便阅读</li>
+</ul>
+
+<p>这4步熟悉后基本一气呵成</p>
+
+<h2 id="46--对一个单词进行操作">4.6  对一个单词进行操作</h2>
+<p>这里先说两个概念，操作符(operator)和动作命令(motion), 操作符就是 <code class="highlighter-rouge">d(delete)</code>, <code class="highlighter-rouge">c(change)</code>, <code class="highlighter-rouge">y(yank)</code> 等等，动作命令是<code class="highlighter-rouge">iw(in word)</code>, <code class="highlighter-rouge">aw(a word)</code>这些，可以通过 <code class="highlighter-rouge">操作符 + 动作命令</code>的方式，组合出千变万化的操作出来，帮助我们快速移动、修改等等。</p>
+
+<p>完整列表可以在 Vim 里输入 :h motion.txt 查看，这里只列出一些常用的。</p>
+
+<h3 id="461-操作符operators">4.6.1 操作符(Operators)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>操作符</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>c</td>
+      <td>change (先删除再进入插入模式)</td>
+    </tr>
+    <tr>
+      <td>d</td>
+      <td>delete</td>
+    </tr>
+    <tr>
+      <td>y</td>
+      <td>yank into register (does not change the text)</td>
+    </tr>
+    <tr>
+      <td>~</td>
+      <td>swap case (转换大小写)</td>
+    </tr>
+    <tr>
+      <td>gu</td>
+      <td>make lowercase (转为小写)</td>
+    </tr>
+    <tr>
+      <td>gU</td>
+      <td>make uppercase (转为大写)</td>
+    </tr>
+    <tr>
+      <td>&gt;</td>
+      <td>shift right (右移)</td>
+    </tr>
+    <tr>
+      <td>&lt;</td>
+      <td>shift left (左移)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="462-动作命令motions">4.6.2 动作命令(Motions)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>动作命令</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>f{char}</td>
+      <td>find, 行内搜索一个字符</td>
+    </tr>
+    <tr>
+      <td>t{char}</td>
+      <td>till, 功能类型 f{chat}, 但是是在这个搜索到的字符前停下，意思是到这个字符之前，很常用的motion</td>
+    </tr>
+    <tr>
+      <td>gg</td>
+      <td>跳到行首</td>
+    </tr>
+    <tr>
+      <td>G</td>
+      <td>跳到行尾</td>
+    </tr>
+    <tr>
+      <td>w</td>
+      <td>移到下个单词的第一个字符</td>
+    </tr>
+    <tr>
+      <td>b</td>
+      <td>移到上个单词的第一个字符</td>
+    </tr>
+    <tr>
+      <td>e</td>
+      <td>移到单词最后一个字符</td>
+    </tr>
+    <tr>
+      <td>ge</td>
+      <td>上个单词的最后一个字符</td>
+    </tr>
+    <tr>
+      <td>aw</td>
+      <td>“a word”, 选择一整个单词，包括它边上的空格</td>
+    </tr>
+    <tr>
+      <td>iw</td>
+      <td>in word, 选择一整个单词，不包括空格</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="463-举例">4.6.3 举例：</h3>
+<ul>
+  <li><code class="highlighter-rouge">diw</code>, delete in word, 删除一个单词，只删除单词本身，不会旁边的空格</li>
+  <li><code class="highlighter-rouge">daw</code>, delete a word, 删除一个单词，并删除旁边的一个空格（至于是左还是右边空格，Vim 会根据上下文自己判断，非常智能）</li>
+  <li><code class="highlighter-rouge">d</code> 是删除， <code class="highlighter-rouge">diw</code> 就是删除一个单词</li>
+  <li><code class="highlighter-rouge">v</code> 是进入 visual 模式的，如果用 <code class="highlighter-rouge">viw</code>, 就表示选中一个单词</li>
+  <li><code class="highlighter-rouge">y</code> 是复制(yank), <code class="highlighter-rouge">yiw</code> 表示复制一个单词</li>
+  <li><code class="highlighter-rouge">gu</code> 是变成小写，<code class="highlighter-rouge">guiw</code> 就是让一个单词变成小写</li>
+  <li><code class="highlighter-rouge">gU</code> 是变成大写, <code class="highlighter-rouge">gUiw</code> 就是让一个单词变成大写
+*</li>
+</ul>
+
+<p>还有很多，这样只要记住一个，就可以举一反三，所以 Vim 是不需要死记硬背的，理解着记会更快。（当然不排除一些要死记硬背，但比较少）</p>
+
+<h2 id="47-把一个单词改成另一个通过复制">4.7 把一个单词改成另一个（通过复制）</h2>
+<p>比如有下面一段代码：</p>
+<div class="language-lua highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">local</span> <span class="n">_hello</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="k">function</span> <span class="nf">test</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">_world</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="c1">-- 用复制的方式把 _world 改成 _hello</span>
+</code></pre></div></div>
+<p>这个问题看起来很简单，但实际上用起来后就会发现并不简单，我们用鼠标时的操作逻辑是下面这样的：</p>
+<ul>
+  <li>双击 _hello，Ctrl+C 复制</li>
+  <li>双击 _world，Ctrl+V 粘贴</li>
+</ul>
+
+<p>想象中的 Vim 操作逻辑是下面这样的：</p>
+<ul>
+  <li>光标移到 <code class="highlighter-rouge">_hello</code>, <code class="highlighter-rouge">yiw</code> 复制</li>
+  <li>光标移到 <code class="highlighter-rouge">_world</code>, <code class="highlighter-rouge">diw</code> 删除，再 <code class="highlighter-rouge">p</code> 粘贴</li>
+</ul>
+
+<p>这时你会发现，咦，贴出来的还是 <code class="highlighter-rouge">_world</code>, 而不是期望中的 <code class="highlighter-rouge">_hello</code>, 这是因为 Vim 里的删除，实际上是剪切，会把删除的东西放到“剪切板”里，所以我们不能这样操作，而应像下面这样操作：</p>
+
+<ul>
+  <li>光标移到 <code class="highlighter-rouge">_hello</code>, <code class="highlighter-rouge">yiw</code> 复制</li>
+  <li>光标移到 <code class="highlighter-rouge">_world</code>, <code class="highlighter-rouge">viw</code> 选中，再 <code class="highlighter-rouge">p</code> 粘贴</li>
+</ul>
+
+<p>这个操作是目前的最优解了，《Vim 实用技巧》这本书里给的也是这个方案（我是先自己发明这个方案才看的书：），这个方案虽然也很别扭，但是够用了，习惯了也不是不能接受。</p>
+
+<h2 id="48-easymotion-文件内快速跳转">4.8 EasyMotion 文件内快速跳转</h2>
+<ul>
+  <li><code class="highlighter-rouge">,,j</code> 按下后，会在每一行的行首高亮且有一个字母标在高亮处，这时输入指定字母就可以跳过去了，这个可以说是起飞的关键之一，必须要熟练掌握</li>
+  <li><code class="highlighter-rouge">,,k</code> 上面是向下搜索，这个是向上，其他都一样</li>
+  <li><code class="highlighter-rouge">,,w</code> 同<code class="highlighter-rouge">,,j</code>，只不过是单词级的向后搜索</li>
+  <li><code class="highlighter-rouge">,,b</code> 同<code class="highlighter-rouge">,,k</code>, 只不过是单词级的向前搜索（<code class="highlighter-rouge">,,w</code> <code class="highlighter-rouge">,,b</code> 不如行级好用，因为太花了，我们可以用行级 Jump 到指定行，再用 f 过去，或者按几个 w 也可以，如果靠近行尾，可以先按$到行尾再按几个 b，方法很多。</li>
+</ul>
+
+<h2 id="49-回到上一个编辑点">4.9 回到上一个编辑点</h2>
+<ul>
+  <li><code class="highlighter-rouge">ctrl+o</code>, 回到上一个编辑点</li>
+  <li><code class="highlighter-rouge">ctrl+i</code>, 前进到下一个编辑点，和上面的相反方向</li>
+  <li><code class="highlighter-rouge">gi</code>, 回到上一个进入插入模式的地方，并进入插入模式，这个在写代码时写到一半想看一下其他地方的代码，看完再按下 <code class="highlighter-rouge">gi</code> 回去，当然也可以 <code class="highlighter-rouge">ctrl+o</code> 回去。</li>
+</ul>
+
+<h2 id="410-代码的快速翻页">4.10 代码的快速翻页</h2>
+<ul>
+  <li><code class="highlighter-rouge">ctrl+f</code>, 下一页</li>
+  <li><code class="highlighter-rouge">ctrl+b</code>, 上一页</li>
+  <li><code class="highlighter-rouge">ctrl+d</code>, 下半页</li>
+  <li><code class="highlighter-rouge">ctrl+u</code>, 上半页</li>
+</ul>
+
+<p>这四个非常常用，尤其是读代码时，我们不可能按住 <code class="highlighter-rouge">j/k</code> 不放去翻代码。</p>
+
+<h2 id="411-分栏">4.11 分栏</h2>
+<ul>
+  <li><code class="highlighter-rouge">:vs</code>, 创建一个竖向分栏</li>
+  <li><code class="highlighter-rouge">:sp</code>, 创建一个横向分栏</li>
+</ul>
+
+<p>在创建多个分栏后，怎样在分栏之间移动？总不能用鼠标吧！当然不需要，下面就是移动分栏的方法：</p>
+
+<ul>
+  <li>先按 <code class="highlighter-rouge">ctrl+w</code> 再按 <code class="highlighter-rouge">h</code>, 移到左边一个分栏</li>
+  <li>先按 <code class="highlighter-rouge">ctrl+w</code> 再按 <code class="highlighter-rouge">l</code>, 移到右边一个分栏</li>
+  <li>先按 <code class="highlighter-rouge">ctrl+w</code> 再按 <code class="highlighter-rouge">j</code>, 移到下边一个分栏</li>
+  <li>先按 <code class="highlighter-rouge">ctrl+w</code> 再按 <code class="highlighter-rouge">k</code>, 移到上边一个分栏</li>
+</ul>
+
+<p>按下 <code class="highlighter-rouge">ctrl+w</code> 后，就进入“移动分栏待决模式”了，这时按 <code class="highlighter-rouge">hjkl</code> 就可以移动了。</p>
+
+<p>分栏在屏幕比较大时还是很方便的，有时候写代码时，要看着另一块代码，也很方便。</p>
+
+<h1 id="5-postface">5. Postface</h1>
+<p>暂时就想到这些，还有很多比较常用的，想到了再补充。以上这些如果能掌握，基本上在 VSCode-Vim 环境下写代码足够了，等真正用进去了，才会发现有很多不会的或者不方便的点，这时要学会去 Google 或请教别人，只有这样才能不断强化，最终让 Vim 操作变成肌肉记忆。</p>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">周岩的 BLOG</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">周岩的 BLOG</li><li><a class="u-email" href="mailto:zhouyanlt@gmail.com">zhouyanlt@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zhouyanlt"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zhouyanlt</span></a></li><li><a href="https://www.twitter.com/zhouyanlt"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zhouyanlt</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

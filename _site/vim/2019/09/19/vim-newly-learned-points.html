@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>新学到的一些 Vim 知识点 | 周岩的 BLOG</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="新学到的一些 Vim 知识点" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="最近发起了一个公司内部的学习班计划, 第一期的 Vim 入门，用的实验楼的课程，看完后还是有很多收获的，我记了下来，免得以后忘掉，大家也可以看看，有些非常有用，比如 g*。" />
+<meta property="og:description" content="最近发起了一个公司内部的学习班计划, 第一期的 Vim 入门，用的实验楼的课程，看完后还是有很多收获的，我记了下来，免得以后忘掉，大家也可以看看，有些非常有用，比如 g*。" />
+<link rel="canonical" href="/vim/2019/09/19/vim-newly-learned-points.html" />
+<meta property="og:url" content="/vim/2019/09/19/vim-newly-learned-points.html" />
+<meta property="og:site_name" content="周岩的 BLOG" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-19T05:00:25+08:00" />
+<script type="application/ld+json">
+{"url":"/vim/2019/09/19/vim-newly-learned-points.html","headline":"新学到的一些 Vim 知识点","dateModified":"2019-09-19T05:00:25+08:00","datePublished":"2019-09-19T05:00:25+08:00","description":"最近发起了一个公司内部的学习班计划, 第一期的 Vim 入门，用的实验楼的课程，看完后还是有很多收获的，我记了下来，免得以后忘掉，大家也可以看看，有些非常有用，比如 g*。","mainEntityOfPage":{"@type":"WebPage","@id":"/vim/2019/09/19/vim-newly-learned-points.html"},"@type":"BlogPosting","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="周岩的 BLOG" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">周岩的 BLOG</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/blog.html">Blog</a><a class="page-link" href="/staff.html">Staff</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1>新学到的一些 Vim 知识点</h1>
+
+<p>
+  19 Sep 2019
+  
+  
+    - <a href="/authors/zhouyan.html">周岩</a>
+  
+</p>
+
+<p>最近发起了一个<a href="https://zhouyanlt.github.io/education/2019/09/19/online-joint-learning-plan.html">公司内部的学习班计划</a>, 第一期的 Vim 入门，用的<a href="https://www.shiyanlou.com/courses/2">实验楼的课程</a>，看完后还是有很多收获的，我记了下来，免得以后忘掉，大家也可以看看，有些非常有用，比如 <code class="highlighter-rouge">g*</code>。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>命令</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>15G</td>
+      <td>跳到15行，我之前都是 :15，感觉后面这个方便点，主要是习惯了吧</td>
+    </tr>
+    <tr>
+      <td>:ce</td>
+      <td>center, 使一行居中</td>
+    </tr>
+    <tr>
+      <td>:le</td>
+      <td>left, 左对齐</td>
+    </tr>
+    <tr>
+      <td>:ri</td>
+      <td>right, 右对齐，这三个好像没什么用，文字编辑工作者用的，平时格式化代码用的比较多的还是 n« 或 n», 当然这个有时候可能会比较高效吧，记住也无妨</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>Like /, but ? is back search</td>
+    </tr>
+    <tr>
+      <td>#</td>
+      <td>同* , 只不过是反向搜索</td>
+    </tr>
+    <tr>
+      <td>g*</td>
+      <td>跟*一样是查找当前单词，但只要部分匹配，这个好用！！一直以为没这个功能</td>
+    </tr>
+    <tr>
+      <td>g#</td>
+      <td>同上，反向搜索</td>
+    </tr>
+    <tr>
+      <td>:e#</td>
+      <td>回到前一个打开个文件，猜测#是个自动变量，保存上个文件的名字，e%是重新打开当前文件，因为%是记录当前文件名的自动变量, 通过 !echo $,# 我的猜测得到了证实</td>
+    </tr>
+    <tr>
+      <td>:f</td>
+      <td>Show current editing file’s name</td>
+    </tr>
+    <tr>
+      <td>:f newname</td>
+      <td>Change current file’s name to newname</td>
+    </tr>
+    <tr>
+      <td>:n</td>
+      <td>Open the next file in the buffer</td>
+    </tr>
+    <tr>
+      <td>:N</td>
+      <td>Open the previous file in the buffer</td>
+    </tr>
+    <tr>
+      <td>vim -x fileName</td>
+      <td>创建加密文件，这个还挺有意思的，可以加密一些私密文件</td>
+    </tr>
+    <tr>
+      <td>:set</td>
+      <td>or :se, show all changed options</td>
+    </tr>
+    <tr>
+      <td>:set all</td>
+      <td>Show all options</td>
+    </tr>
+    <tr>
+      <td>:set option?</td>
+      <td>Show option’s value</td>
+    </tr>
+    <tr>
+      <td>:set nooption</td>
+      <td>Cancel option’s value</td>
+    </tr>
+    <tr>
+      <td>:set option=xxx</td>
+      <td>设置某个选项的值，不同选项的可选值需要查文档</td>
+    </tr>
+    <tr>
+      <td>:set autoindent(ai)</td>
+      <td>auto indent 自动缩进</td>
+    </tr>
+    <tr>
+      <td>:set autowrite(aw)</td>
+      <td>设置自动存档，默认未打开</td>
+    </tr>
+    <tr>
+      <td>:set backup(bk)</td>
+      <td>设置自动备份，默认未打开</td>
+    </tr>
+    <tr>
+      <td>:set cindent(cin)</td>
+      <td>设置 C 语言风格缩进，不知道干嘛的</td>
+    </tr>
+    <tr>
+      <td>:set shiftwidth=4</td>
+      <td>设置每次缩进时的空格数</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>最后吐槽下实验楼的这个课程，里面很多写错的，课程安排也不太好，很多没用的，这也就是给我这样的老手看还能吸收这么多有用知识，新人早劝退了。</p>
+
+<p>新人入门还是推荐 CoolShell 的文章：
+<a href="https://coolshell.cn/articles/5426.html">简明 VIM 练级攻略</a></p>
+
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">周岩的 BLOG</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">周岩的 BLOG</li><li><a class="u-email" href="mailto:zhouyanlt@gmail.com">zhouyanlt@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zhouyanlt"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zhouyanlt</span></a></li><li><a href="https://www.twitter.com/zhouyanlt"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">zhouyanlt</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
