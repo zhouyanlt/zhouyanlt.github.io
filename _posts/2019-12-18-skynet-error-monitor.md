@@ -16,35 +16,48 @@ categories: skynet
 
 函数类型 | 入口点 | 底层代码位置
 ---|---|---
-skynet.dispatch | dispatch 函数自身 | 无
-skynet.fork | assert | 
-skynet.timeout | error | 
+skynet.dispatch | dispatch 函数自身 |  
+skynet.fork | error | skynet.lua Line 184, 607行resume后协程执行报错,协程中断,不会直接报错,只是结束协程并让出执行权,resume返回nil传到suspend内，184行调用error
+skynet.timeout | assert | skynet.lua Line 617, 这个跟普通消息一样都是走 dispatch_message, pcall+ assert 
 snax 服务 | assert | snaxd.lua Line 46
 
 可以看到，除了 dispatch 外，其他几类都在 assert/error 里，所以我们只需要改写 assert/error 函数，并在 dispatch 里使用 pcall 把真正的业务函数包起来，再把结果送到 assert 或 error 里，整个错误拦截就完成了。
 
 之所以这么简单，还是得益于云风良好的编码风格，几乎底层在执行上层业务函数时，都是 pcall 包起来，再由 assert/error 抛出这么个模式。
 
+pcall+assert 示例代码：
+
+```lua
+local ok, err = pcall(f, ...)
+assert(ok, err)
+```
+
+
+
+
+
 ## 2.2 服务设计
 我们需要创建一个专门发错误信息的服务，在改写 assert/error 时，把错误信息统一转发到这个服务，再由这个服务处理。
 
-我们给这个服务起名叫 error_monitor 吧，这里面只做一件事，接收其他服务发来的报错信息，整理一下（带上集群名和节点ID即可），发到目的地即可。
+给这个服务起名叫 error_monitor 吧，这里面只做一件事，接收其他服务发来的报错信息，整理一下（带上集群名和节点ID），发到目的地即可。
 
 ## 2.3 错误信息发送目的地
-拦截到错误信息后，想发到哪都可以，我们不弄太复杂，直接用钉钉机器人。不熟悉的看[这里](https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq)。
+拦截到错误信息后，想发到哪都可以，我们不弄太复杂，直接用钉钉机器人。不熟悉的可以看看[这里](https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq)。
 
 发送的方式也不打算用 libcurl, 而是直接用终端里的 curl, os.execute("curl xxxx"), 这里只是为了简单，因为假设我们的报错信息不是很多，用这种方式也完全够用了。如果你觉得你们的报错很多，可以改用 libcurl, 当然这样30行代码搞不定了。
+
+或者如果不想在游戏进程内处理，也可以把报错信息发到一个类似 `rabbitmq` 这样的消息队列里，再在外面起一个进程去消息这些报错。 
 
 # 3. 实现
 ## 3.1 实现 error_monitor 服务
 ```lua
 local skynet = require "skynet"
 skynet.start(function()
-    local worldName = skynet.getenv("world_name") or "Unknown(Please add world_name to config)" -- worldName 也就是集群名，比如是内服还是外服
+    local worldName = skynet.getenv("world_name") or "Unknown(Please add world_name to config)" -- worldName 也就是集群名，用来判断是哪个服务器，默认可以用 require("skynet.cluster.core").nodename()
     local url = "https://oapi.dingtalk.com/robot/send?access_token=xxxxx" -- 后面的xxx改成自己机器人的token
-    local selfnodeid = 1 -- 这里想办法取到自己的节点id
+    local selfnodeid = 1 -- 自己的节点id
     skynet.dispatch("lua", function(_,_,...)
-        os.execute(string.format([[curl '%s' -H 'Content-Type: application/json' -d '{"msgtype":"markdown","markdown":{"title":"ERROR","text":"* World: %s\n* Node: %d\n* Traceback:\n```%s```"}}']],
+        os.execute(string.format([[curl '%s' -H 'Content-Type: application/json' -d '{"msgtype":"markdown","markdown":{"title":"ERROR","text":"* World: %s\n* Node: %d\n* Traceback:\n`%s`"}}']],
             url, worldName, selfnodeid, select("#",...)>1 and table.concat({...}," ") or tostring(...)))
     end)
 end)
@@ -69,8 +82,18 @@ function util.registerErrorMonitor()
     end)
 end
 ```
-改写完后，在需要监控报错的服务的初始化那里，调一下这个函数即可。
+改写完后，在需要监控报错的服务的初始化那里，调一下`util.registerErrorMonitor`即可。
 
-这里不推荐把改写函数放到 preload 里去，因为并不是所有服务都需要改写的，一般我们只改几个大的业务服务即可，更不用说还不能在 preload 里调 uniqueservice，当然这个有办法克服，但没有必要。
+这里不推荐把改写函数放到 preload 里去，因为并不是所有服务都需要改写的，一般我们只改几个大的业务服务即可，再说也不能在 preload 里调 uniqueservice。
 
-最后不要忘记 skynet.dispatch 改成 pcall+assert 的模式，这样才可以把报交出去，如果不想要重复写(DRY原则)，可以简单封装一下。（我们业务层基本都是 snax 服务，所以没这个烦恼：）
+最后不要忘记 skynet.dispatch 改成 pcall+assert 的模式，这样才可以把报错抛出去，如果不想要重复写这段代码，可以简单封装一下：
+
+```lua
+function skynet_dispatch(typename, func)
+    skynet.dispatch(typename, function(session, source, cmd, ...)
+        assert(pcall, func, session, source, cmd, ...)
+    end)
+end
+```
+
+
