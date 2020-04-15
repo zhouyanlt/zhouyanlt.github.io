@@ -2,7 +2,7 @@
 layout: post
 title:  "对 Hustle Castle 的一些看法"
 date:   2020-03-23 16:38:25 +0800
-categories: gamedev
+categories: game_design
 ---
 
 首先必须承认，Hustle Castle 是一款非常优秀的产品，开发商 Studio NORD 做对了很多事情，所以可以取得如此辉煌的成绩（日流水1000万RMB），但就我玩的过程来看，它的缺点远大于优点，基本上美好的体验只在第一天有，后面痛苦体验远大于美好体验。
@@ -45,4 +45,3 @@ categories: gamedev
 
 如果有团队想优化迭代这款产品，可以从上述痛点着手优化，保持核心机制，优化成长机制和界面，换一个故事（IP），相信一定能做出一个更优秀的产品出来。
 
-THE END
