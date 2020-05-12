@@ -18,6 +18,7 @@ categories: game_design
 * 事件系统
 * 跨服交互
 * 配置管理
+* 导表工具
 * 运维支持
 * 等等
 
