@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "手游设计原则：碎片化和轻度化"
-date:   2020-05-11 20:26:25 +0800
-categories: game_design
+title:  "ANSI Common Lisp 第二章参考答案"
+date:   2018-10-01 20:26:25 +0800
+categories: lisp
 ---
 
 习题链接：
