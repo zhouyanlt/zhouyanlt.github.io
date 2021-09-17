@@ -6,7 +6,7 @@ categories: game_design
 ---
 
 # 乔治·范 George Fan
-今天看了芒果冰讲 PvZ(Plants vs Zombies 植物大战僵尸) 的[视频](https://www.bilibili.com/video/BV1pM4y1577b)，里面讲到该游戏的制作人 George Fan 制作游戏的过程。
+今天看了芒果冰讲 PvZ (Plants vs Zombies 植物大战僵尸) 的[视频](https://www.bilibili.com/video/BV1pM4y1577b)，里面讲到该游戏的制作人 George Fan 制作 PvZ 的过程。
 从他的经历，让我对游戏设计有了一些新的感想，并且也有了一些信心。
 原来他做游戏设计时，也会大量参考其他游戏啊，视频里有讲到他在为新游戏做“市场调研”，对其他游戏做了很多参考。
 
