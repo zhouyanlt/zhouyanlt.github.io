@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "《品三国》60%读后感：读书使人获得智慧"
+title:  "《品三国》60% 读后感：读书使人获得智慧"
 date:   2020-08-09 20:26:25 +0800
 categories: thinking
 ---
