@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "《品三国》 50% 读后感：团队合作、长期规划"
+title:  "《品三国》50% 读后感：团队合作、长期规划"
 date:   2020-08-07 20:26:25 +0800
 categories: thinking
 ---
